@@ -1,0 +1,24 @@
+LAB 04
+mysql> create table marynarze select * from postac;
+
+mysql> update postac
+    -> set statek=NULL;
+mysql> delete from statek;
+
+
+
+
+LAB 05 
+mysql> create table kreatura select * from wikingowie.kreatura;
+mysql> create table ekwipunek select * from wikingowie.ekwipunek;
+mysql> create table zasob select * from wikingowie.zasob;
+select * from zasob;
+select * from zasob where rodzaj="jedzenie";
+mysql> select idZasobu, ilosc from ekwipunek where idKreatury=3 or idKreatury=1 or idKreatury=5;
+SELECT * from kreatura where rodzaj !='wiedzma' and udzwig>=50;
+mysql> SELECT * FROM zasob WHERE waga BETWEEN 2 AND 5;
+mysql> select nazwa from kreatura where nazwa like '%or%' and udzwig between 30 and 70;
+ select * from Kreatura order by dataUr asc limit 5;
+mysql> select * from zasob where rodzaj is not null order by waga;
+mysql> select distinct rodzaj from zasob;
+select concat(nazwa," - ",rodzaj) from kreatura;
