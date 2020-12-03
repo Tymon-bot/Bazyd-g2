@@ -1,0 +1,29 @@
+select distinct rodzaj from zasob;
+select concat(nazwa, " - ",rodzaj) from kreatura;
+mysql> select concat(nazwa,"-", rodzaj)as zadanie_4  from kreatura;
+mysql> select concat(nazwa,"-",rodzaj) as zadanie_4 from kreatura where rodzaj like '%wi';
+mysql> select nazwa, ilosc*waga as waga from zasob where year(dataPozyskania) between 2000 and 2007;
+
+
+mysql> select nazwa,waga*0.7 as masa_wlasciwa, waga*0.3 as masa_odpadkow from zasob;
+mysql> select nazwa from zasob where rodzaj is null;
+mysql> select distinct nazwa,rodzaj from zasob where nazwa like 'ba%' or nazwa like '%os' order by nazwa asc;
+
+
+LAB 06
+mysql> select avg(waga) from kreatura where rodzaj='wiking';
+mysql> select rodzaj, count(nazwa) as ilosc,avg(waga) as srednia_waga from kreatura group by rodzaj;
+mysql> select rodzaj,round(avg(year(current_timestamp)-year(dataUr)))as sredni_wiek from kreatura  gr
+oup by rodzaj;
+
+
+select rodzaj,sum(waga*ilosc) from zasob group by rodzaj;
+select nazwa,avg(waga) from zasob where ilosc>=4 group by nazwa having avg(waga)>10;
+mysql> select rodzaj, count(distinct(nazwa))as ilosc from kreatura group by rodzaj;
+
+
+mysql> select k.nazwa, sum(e.ilosc) from kreatura as k inner join ekwipunek as e on k.idKreatury = e.idKreatury group by k.nazwa;
+mysql> select k.nazwa,z.nazwa,e.ilosc from kreatura as k, zasob as z, ekwipunek as e where k.idKreatury = e.idKreatury and z.idZasobu = e.idZasobu;
+mysql> select * from kreatura k left join ekwipunek e on k.idKreatury = e.idKreatury where e.idKreatury is null;
+
+/////// Koniec zadania 3 //////////////
