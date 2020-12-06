@@ -1,0 +1,28 @@
+Zadanie 4 lab 06
+
+mysql> select k.nazwa,z.nazwa from kreatura as k , ekwipunek as e, zasob as z where k.idKreatury=e.idKreatury and e.idZasobu=z.idZasobu and k.rodzaj='wiking' and k.dataur between '1670-01-01' and '1679-12-31';
+mysql> select k.nazwa from kreatura as k,ekwipunek as e,zasob as z where k.idkreatury=e.idkreatury and e.idzasobu=z.idzasobu and z.rodzaj='jedzenie' order by k.dataur asc limit 5;
+mysql> select concat(k.nazwa,' - ',k2.nazwa) from kreatura as k, kreatura as k2 where k2.idKreatury=k.idkreatury+5;
+
+Zadanie 5 lab 06
+
+mysql> select k.rodzaj, avg(e.ilosc*z.waga) as srednia from kreatura as k inner join ekwipunek as e inner join zasob as z on k.idkreatury=e.idkreatury and e.idzasobu=z.idzasobu where k.rodzaj not in('malpa','waz') group by k.rodzaj having sum(e.ilosc)<30;
+
+
+
+Lab 07 
+ZAdanie 1
+mysql> insert into kreatura select * from wikingowie.kreatura;
+mysql> create table etapy_wyprawy select * from wikingowie.etapy_wyprawy;
+mysql> create table uczestnicy select * from wikingowie.uczestnicy;
+mysql> create table wyprawa select * from wikingowie.wyprawa;
+mysql> create table sektor select * from wikingowie.sektor;
+
+mysql> select k.nazwa from kreatura as k left join uczestnicy as u on k.idKreatury=u.id_uczestnika where k.idKreatury is null or u.id_uczestnika is null;
+
+
+select w.nazwa, sum(e.ilosc) 
+from kreatura as k, wyprawa as w, uczestnicy as u, ekwipunek as e 
+where k.idKreatury=e.idKreatury 
+and k.idKreatury=u.id_uczestnika 
+and u.id_wyprawy=w.id_wyprawy GROUP BY w.nazwa;
